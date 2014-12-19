@@ -20,13 +20,13 @@ WLAN_IFACE=$(nvram get wl1_ifname) # default=eth2 (wireless network)
 LAN_BR=$(nvram get lan_ifname) # default=br0
 
 #-----------------------------------------------------------------------------
-# MEO ISP Configuration 
+# Vodafone ISP Configuration 
 #-----------------------------------------------------------------------------
-VLAN_IFACE="vlan12" # vlan for the MEO IPTV and VoIP
-VLAN_VENDOR_CLASS="2WHPL" # required for the MEO vlan DHCP server
+VLAN_IFACE="vlan105" # vlan for the Vodafone IPTV
+#VLAN_VENDOR_CLASS="??" # required for the VDF vlan DHCP server ??
 
 # This file is written by the meo_post-dhcp-vlan-config script when the udhcp 
-# client has gottan an IP address from the MEO vlan DHCP server.
+# client has gottan an IP address from the VDF vlan DHCP server.
 # It is needed at least by the nat-start script.
 VLAN_IP_FILE="/tmp/vlan_ip"
 

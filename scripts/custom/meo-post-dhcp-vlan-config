@@ -16,8 +16,8 @@
 # $subnet: 255.255.192.0
 # $vlan_gateway: 10.y.y.y
 #
-# Its purpose is to set up the routes so that requests to MEO specific services
-# from the private local network are routed to the MEO IPTV/VoIP vlan.
+# Its purpose is to set up the routes so that requests to VDF specific services
+# from the private local network are routed to the VDF IPTV vlan.
 
 vlan_iface=$interface
 vlan_ip=$ip
@@ -31,29 +31,91 @@ vlan_ip_file="/tmp/vlan_ip"
 # These routes are set up on the original hardware, as observed in a backup 
 # file (user.ini).
 #-----------------------------------------------------------------------------
-configure_meo_routes () {
+configure_vdf_routes () {
   logger "$0: setting up VLAN routes"
   
-  # rule add chain=rt_user_labels index=1 dstip=10.173.[192-255].* log=disabled state=enabled label=toVideoNet
-  ## 10.173.0.1 -> 10.173.255.254
-  ## 10.173.0.0 / 255.255.255.0 / 16
+  # rule add chain=qos_user_labels index=1 dstip=IPTVnetVDF log=disabled state=enabled label=Video
+  # add name=IPTVnetVDF type=ip addr=212.18.177.[96-127] mask=27
+  ## 212.18.177.97 -> 212.18.177.126
+  ## 212.18.177.96 / 255.255.255.224 / 27
   ## http://www.aboutmyip.com/AboutMyXApp/SubnetCalculator.jsp?ipAddress=10.173.0.0&cidr=16
-  route add -net 10.173.0.0 netmask 255.255.0.0 gw $vlan_gateway dev $vlan_iface
+  route add -net 212.18.177.96 netmask 255.255.255.224 gw $vlan_gateway dev $vlan_iface
   
-  # rule add chain=rt_user_labels index=2 dstip=213.13.[16-24].* log=disabled state=enabled label=toVideoNet
-  # 213.13.[16-24]
-  ## 213.13.16.1 -> 213.13.31.254
-  ## 213.13.16.0 / 255.255.240.0 / 20
-  ## http://www.aboutmyip.com/AboutMyXApp/SubnetCalculator.jsp?ipAddress=213.13.16.0&cidr=20
-  # Covers VoIP Proxy: proxy.ims.iptv.telecom.pt (213.13.24.225)
-  route add -net 213.13.16.0 netmask 255.255.240.0 gw $vlan_gateway dev $vlan_iface 
+  # rule add chain=qos_user_labels index=1 dstip=IPTVnetVDF log=disabled state=enabled label=Video
+  # add name=IPTVnetVDF type=ip addr=95.136.[4-5].* mask=23
+  ## 95.136.4.1 -> 95.136.5.254
+  ## 95.136.4.0 / 255.255.254.0 / 23
+  route add -net 95.136.4.0 netmask 255.255.254.0 gw $vlan_gateway dev $vlan_iface 
   
-  # rule add chain=rt_user_labels index=3 dstip=194.65.[46-47].* log=disabled state=enabled label=toVideoNet
-  # 194.65.46.0 -> 194.65.47.254
-  ## 194.65.46.0 / 255.255.254.0 / 23 
-  ## http://www.aboutmyip.com/AboutMyXApp/SubnetCalculator.jsp?ipAddress=194.65.46.0&cidr=23 
-  # Covers VLAN DNS servers: 194.65.47.44 and 194.65.47.43
-  route add -net 194.65.46.0 netmask 255.255.254.0 gw $vlan_gateway dev $vlan_iface
+  # rule add chain=qos_user_labels index=1 dstip=IPTVnetVDF log=disabled state=enabled label=Video
+  # add name=IPTVnetVDF type=ip addr=95.136.4.[112-119] mask=29
+  ## 95.136.4.113 -> 95.136.4.118
+  ## 95.136.4.112 / 255.255.255.248 / 29
+  route add -net 95.136.4.112 netmask 255.255.255.248 gw $vlan_gateway dev $vlan_iface
+  
+  # rule add chain=qos_user_labels index=1 dstip=IPTVnetVDF log=disabled state=enabled label=Video
+  # add name=IPTVnetVDF type=ip addr=87.103.119.196 mask=32
+  ## 87.103.119.196/32 / 255.255.255.255
+  route add -net 87.103.119.196 netmask 255.255.255.255 gw $vlan_gateway dev $vlan_iface
+  
+  # rule add chain=qos_user_labels index=1 dstip=IPTVnetVDF log=disabled state=enabled label=Video
+  # add name=IPTVnetVDF type=ip addr=213.30.36.212 mask=32
+  ## 213.30.36.212 / 255.255.255.255
+  route add -net 213.30.36.212 netmask 255.255.255.255 gw $vlan_gateway dev $vlan_iface
+  
+  # rule add chain=qos_user_labels index=1 dstip=IPTVnetVDF log=disabled state=enabled label=Video
+  # add name=IPTVnetVDF type=ip addr=10.20.100.[0-31] mask=27
+  ## 10.20.100.1 -> 10.20.100.30
+  ## 10.20.100.0 / 255.255.255.224 / 27
+  route add -net 10.20.100.0 netmask 255.255.255.224 gw $vlan_gateway dev $vlan_iface
+  
+  # rule add chain=qos_user_labels index=1 dstip=IPTVnetVDF log=disabled state=enabled label=Video
+  # add name=IPTVnetVDF type=ip addr=87.103.[116-119].* mask=22
+  ## 87.103.116.1 -> 87.103.119.254
+  ## 87.103.116.0 / 255.255.252.0 / 22
+  route add -net 95.136.4.112 netmask 255.255.252.0 gw $vlan_gateway dev $vlan_iface
+  
+  # rule add chain=qos_user_labels index=1 dstip=IPTVnetVDF log=disabled state=enabled label=Video
+  # add name=IPTVnetVDF type=ip addr=93.108.253.[128-255] mask=25
+  ## 93.108.253.129 -> 93.108.253.254
+  ## 93.108.253.128 / 255.255.255.128 / 25
+  route add -net 93.108.253.128 netmask 255.255.255.128 gw $vlan_gateway dev $vlan_iface
+  
+  # rule add chain=qos_user_labels index=1 dstip=IPTVnetVDF log=disabled state=enabled label=Video
+  # add name=IPTVnetVDF type=ip addr=10.20.110.[0-31] mask=27
+  ## 10.20.110.1 -> 10.20.110.30
+  ## 10.20.110.0 / 255.255.255.224 / 27
+  route add -net 10.20.110.0 netmask 255.255.255.224 gw $vlan_gateway dev $vlan_iface
+  
+  # rule add chain=qos_user_labels index=1 dstip=IPTVnetVDF log=disabled state=enabled label=Video
+  # add name=IPTVnetVDF type=ip addr=10.20.120.[0-31] mask=27
+  ## 10.20.120.1 -> 10.20.120.30
+  ## 10.20.120.0 / 255.255.255.224 / 27
+  route add -net 10.20.120.0 netmask 255.255.255.224 gw $vlan_gateway dev $vlan_iface
+  
+  # rule add chain=qos_user_labels index=1 dstip=IPTVnetVDF log=disabled state=enabled label=Video
+  # add name=IPTVnetVDF type=ip addr=10.20.150.[0-31] mask=27
+  ## 10.20.150.1 -> 10.20.150.30
+  ## 10.20.150.0 / 255.255.255.224 / 27
+  route add -net 10.20.150.0 netmask 255.255.255.224 gw $vlan_gateway dev $vlan_iface
+  
+  # rule add chain=qos_user_labels index=1 dstip=IPTVnetVDF log=disabled state=enabled label=Video
+  # add name=IPTVnetVDF type=ip addr=213.30.43.16 mask=32
+  ## 213.30.43.16 / 255.255.255.255
+  route add -net 213.30.43.16 netmask 255.255.255.255 gw $vlan_gateway dev $vlan_iface
+  
+  # rule add chain=qos_user_labels index=1 dstip=IPTVnetVDF log=disabled state=enabled label=Video
+  # add name=IPTVnetVDF type=ip addr=213.30.36.[208-215] mask=29
+  ## 213.30.36.209 -> 213.30.36.215
+  ## 213.30.36.208 / 255.255.255.248 / 29
+  route add -net 213.30.36.208 netmask 255.255.255.248 gw $vlan_gateway dev $vlan_iface
+  
+  # rule add chain=qos_user_labels index=1 dstip=IPTVnetVDF log=disabled state=enabled label=Video
+  # add name=IPTVnetVDF type=ip addr=10.163.114.0/24 mask=24
+  ## 10.163.114.1 -> 10.163.114.254
+  ## 10.163.114.0 / 255.255.255.0 / 24
+  route add -net 10.163.114.0 netmask 255.255.255.0 gw $vlan_gateway dev $vlan_iface
+  
                      
   logger "$0: saving vlan ip $vlan_ip to $vlan_ip_file"
   
@@ -80,7 +142,7 @@ bound() {
   # rp_filter must be off on vlan12!!!
   echo 0 > /proc/sys/net/ipv4/conf/$vlan_iface/rp_filter
         
-  configure_meo_routes
+  configure_vdf_routes
  
   logger "$0: completed"
 }

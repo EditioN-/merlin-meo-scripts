@@ -18,7 +18,7 @@ bogus-priv
 # Send MEO specific IPTV/VoIP requests to the vlan DNS servers, 
 # not the default DNS servers.
 # See: http://blog.zipleen.com/2010/12/howto-setup-netgear-3500l-or-wrt54gl.html
-server=/.iptvpoc.alu/discovery.iptv.microsoft.com/iptv.vodafone.pt/iptvdiscovery/???DNSVDF             
-server=/.iptvpoc.alu/discovery.iptv.microsoft.com/iptv.vodafone.pt/iptvdiscovery/???DNSVDF   
+server=/.iptvpoc.alu/discovery.iptv.microsoft.com/.iptv.vodafone.pt/iptvdiscovery/87.103.119.196             
+server=/.iptvpoc.alu/discovery.iptv.microsoft.com/.iptv.vodafone.pt/iptvdiscovery/213.30.36.212   
 
 

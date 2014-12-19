@@ -9,12 +9,8 @@ quickleave
 phyint vlan105 upstream ratelimit 0 threshold 1
 	altnet 212.18.177.96/27
 	altnet 95.136.4.0/23
-	altnet 95.136.4.112/29 
-	#altnet 87.103.119.196/32
-	#altnet 213.30.36.212/32
 	altnet 87.103.116.0/22
 	altnet 93.108.253.128/25
-	#altnet 213.30.43.16/32
 	altnet 213.30.36.208/29
 
 phyint br0 downstream ratelimit 0 threshold 1

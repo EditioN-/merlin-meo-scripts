@@ -13,7 +13,7 @@ CUSTOM_SCRIPT_DIR="/jffs/scripts/custom"
 #-----------------------------------------------------------------------------
 # Router's Private LAN Configuration 
 #-----------------------------------------------------------------------------
-LAN_NET="192.168.1.0/24" # default value. change this if you changed your network
+LAN_NET="192.168.128.0/24" # default value. change this if you changed your network
 LAN_IP=$(nvram get lan_ipaddr)
 LAN_IFACE=$(nvram get wl0_ifname) # default=eth1 (wired network)
 WLAN_IFACE=$(nvram get wl1_ifname) # default=eth2 (wireless network)
@@ -24,6 +24,7 @@ LAN_BR=$(nvram get lan_ifname) # default=br0
 #-----------------------------------------------------------------------------
 VLAN_IFACE="vlan105" # vlan for the Vodafone IPTV
 VLAN_VENDOR_CLASS="if_rcv_opt125" # required for the VDF vlan DHCP server ??
+
 
 # This file is written by the meo_post-dhcp-vlan-config script when the udhcp 
 # client has gottan an IP address from the VDF vlan DHCP server.

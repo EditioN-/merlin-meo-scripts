@@ -13,7 +13,7 @@ CUSTOM_SCRIPT_DIR="/jffs/scripts/custom"
 #-----------------------------------------------------------------------------
 # Router's Private LAN Configuration 
 #-----------------------------------------------------------------------------
-LAN_NET="192.168.128.0/24" # default value. change this if you changed your network
+LAN_NET="192.168.136.0/24" # default value. change this if you changed your network
 LAN_IP=$(nvram get lan_ipaddr)
 LAN_IFACE=$(nvram get wl0_ifname) # default=eth1 (wired network)
 WLAN_IFACE=$(nvram get wl1_ifname) # default=eth2 (wireless network)

@@ -10,7 +10,7 @@ configure_meo_rules () {
   # These are the networks whose packets we want to ROUTE OUT of our LOCAL network to the VLAN
   # The original router doesn't seem to give access to 10.x networks in its config, so they
   # are being excluded here.
-  local forward_vlan_networks_out="213.13.16.0/20 194.65.46.0/23"
+  local forward_vlan_networks_out="212.18.177.96/27 95.136.4.0/23 95.136.4.112/29 87.103.119.196/32 213.30.36.212/32 87.103.116.0/22 93.108.253.128/25 213.30.43.16/32 213.30.36.208/29"
   local mcast_net="239.255.255.250/32"
 
   for vlan_net in $forward_vlan_networks_out; do

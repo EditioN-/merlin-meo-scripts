@@ -4,7 +4,7 @@
 configure_meo_rules () {
 
   # These are the networks whose packets we want to FORWARD INto our LOCAL network
-  local forward_vlan_networks_in="10.173.0.0/16 213.13.16.0/20 194.65.46.0/23"
+  local forward_vlan_networks_in="212.18.177.96/27 95.136.4.0/23 95.136.4.112/29 87.103.119.196/32 213.30.36.212/32 10.20.100.0/27 87.103.116.0/22 93.108.253.128/25 10.20.110.0/27 10.20.120.0/27 10.20.150.0/27 213.30.43.16/32 213.30.36.208/29 10.163.114.0/24"
 
   local mcast_ip="224.0.0.0/4"
   local mcast_port="1025"

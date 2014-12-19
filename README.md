@@ -1,4 +1,4 @@
-merlin-meo-scripts
+merlin-vodafone-scripts
 ==================
 
 An adaptation of zipleen's [tomato-ddwrt-meo-iptv-scripts](https://github.com/zipleen/tomato-ddwrt-meo-iptv-scripts) to work with routers running [Merlin firmware](http://www.lostrealm.ca/tower/node/79).

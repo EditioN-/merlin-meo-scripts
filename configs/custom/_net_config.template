@@ -23,7 +23,7 @@ LAN_BR=$(nvram get lan_ifname) # default=br0
 # Vodafone ISP Configuration 
 #-----------------------------------------------------------------------------
 VLAN_IFACE="vlan105" # vlan for the Vodafone IPTV
-VLAN_VENDOR_CLASS="if_rcv_opt125" # required for the VDF vlan DHCP server ??
+#VLAN_VENDOR_CLASS="if_rcv_opt125" # Not needed in vodafone
 
 
 # This file is written by the meo_post-dhcp-vlan-config script when the udhcp 

@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #-----------------------------------------------------------------------------
-configure_meo_rules () {
+configure_vdf_routes () {
 
   # Sometimes nat-start is called before the VLAN dhcp server script.  In
   # these cases, just bail.
@@ -35,4 +35,4 @@ logger "$0 event called with args: $@"
 source /jffs/scripts/custom/_net_functions
 init_config
 
-configure_meo_rules
+configure_vdf_routes
